@@ -5,11 +5,13 @@ import { usePlan } from '@/context/PlanContext';
 import Spinner from '@/components/Spinner';
 import PlanItem from '@/components/PlanItem';
 import EmptyState from '@/components/EmptyState';
+import SortSelect from '@/components/SortSelect';
 
 const MyPlan = () => {
     const { workouts, loading } = useWorkouts();
     const { plan, saved } = usePlan();
     const [tab, setTab] = useState("plan");
+    const [sort, setSort] = useState("duration");
 
     // plan only stores ids, so find the full workout for each id
     const planItems = plan
@@ -24,6 +26,14 @@ const MyPlan = () => {
         .filter((item) => item);
 
     const list = tab === "plan" ? planItems : savedItems;
+
+    // duration goes short to long, calories and rating go high to low
+    const sortedList = [...list];
+    if (sort === "duration") {
+        sortedList.sort((a, b) => a.duration - b.duration);
+    } else {
+        sortedList.sort((a, b) => b[sort] - a[sort]);
+    }
 
     // numbers on the top cards come from today's plan
     let minutes = 0;
@@ -70,13 +80,15 @@ const MyPlan = () => {
                         Saved
                     </button>
                 </div>
+
+                <SortSelect value={sort} onChange={setSort} />
             </div>
 
             {loading && <Spinner />}
-            {!loading && list.length === 0 && <EmptyState />}
+            {!loading && sortedList.length === 0 && <EmptyState />}
 
             <ul className="space-y-3">
-                {list.map((w) => (
+                {sortedList.map((w) => (
                     <PlanItem key={w.id} w={w} variant={tab} />
                 ))}
             </ul>
