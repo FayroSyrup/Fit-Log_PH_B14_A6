@@ -77,7 +77,7 @@ const MyPlan = () => {
 
             <ul className="space-y-3">
                 {list.map((w) => (
-                    <PlanItem key={w.id} w={w} />
+                    <PlanItem key={w.id} w={w} variant={tab} />
                 ))}
             </ul>
         </div>
