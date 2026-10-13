@@ -65,7 +65,7 @@ const WorkoutDetails = () => {
                     ))}
                 </ol>
 
-                <DetailActions />
+                <DetailActions w={w} />
             </div>
         </div>
     );
