@@ -2,7 +2,7 @@
 
 A dark, no-nonsense gym companion. Pick a lift, lock it into today's plan, and watch the week's work add up.
 
-Live: https://vercel.com/fayrosyrup/fit-log-ph-b14-a6
+Live: https://fit-log-ph-b14-a6-phi.vercel.app/
 
 ## Technologies
 - Next.js (App Router)
